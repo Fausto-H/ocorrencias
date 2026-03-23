@@ -17,7 +17,6 @@ class OcorrenciaController extends Controller
             'endereco' => 'required|string',
         ]);
 
-        // Gerar iniciais do nome
         $iniciais = collect(explode(' ', $data['nome_paciente']))
             ->filter()
             ->take(2)
@@ -26,8 +25,7 @@ class OcorrenciaController extends Controller
 
         $iniciais = $iniciais ?: 'XX';
 
-        // Timestamp
-        $agora = Carbon::now();
+        $agora = now()->setTimezone('America/Fortaleza');
         $timestamp = $agora->format('Ymd-His') . '-' . substr($agora->format('u'), 0, 3);
 
         $data['protocolo'] = "{$timestamp}-{$iniciais}";
