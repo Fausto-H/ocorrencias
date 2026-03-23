@@ -23,4 +23,11 @@ class OcorrenciaController extends Controller
 
         return response()->json($ocorrencia, 201);
     }
+
+    public function index()
+    {
+        $ocorrencias = Ocorrencia::orderBy('created_at', 'desc')->get();
+
+        return response()->json($ocorrencias);
+    }
 }
