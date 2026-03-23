@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Ocorrencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class OcorrenciaController extends Controller
 {
@@ -17,7 +17,20 @@ class OcorrenciaController extends Controller
             'endereco' => 'required|string',
         ]);
 
-        $data['protocolo'] = strtoupper(Str::random(10));
+        // Gerar iniciais do nome
+        $iniciais = collect(explode(' ', $data['nome_paciente']))
+            ->filter()
+            ->take(2)
+            ->map(fn($n) => strtoupper(substr($n, 0, 1)))
+            ->implode('');
+
+        $iniciais = $iniciais ?: 'XX';
+
+        // Timestamp
+        $agora = Carbon::now();
+        $timestamp = $agora->format('Ymd-His') . '-' . substr($agora->format('u'), 0, 3);
+
+        $data['protocolo'] = "{$timestamp}-{$iniciais}";
 
         $ocorrencia = Ocorrencia::create($data);
 
