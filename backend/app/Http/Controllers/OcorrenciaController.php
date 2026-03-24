@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendProtocolWhatsAppJob;
 use App\Models\Ocorrencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -53,6 +54,8 @@ class OcorrenciaController extends Controller
         $data['protocolo'] = "{$timestamp}-{$iniciais}";
 
         $ocorrencia = Ocorrencia::create($data);
+
+        SendProtocolWhatsAppJob::dispatch($ocorrencia->id)->afterCommit();
 
         return response()->json($ocorrencia, 201);
     }

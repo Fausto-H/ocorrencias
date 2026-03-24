@@ -56,3 +56,61 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## WhatsApp assíncrono (fila)
+
+Quando uma ocorrencia e criada, o backend dispara um job para enviar o protocolo via WhatsApp em segundo plano.
+
+### Arquitetura
+
+- Controller salva a ocorrencia e despacha `SendProtocolWhatsAppJob`
+- A fila processa no worker
+- O envio usa `App\Services\WhatsApp\WhatsAppMessageSender`
+
+### Configuracao rapida
+
+1. Configure no `.env`:
+
+```env
+QUEUE_CONNECTION=database
+WHATSAPP_QUEUE=whatsapp
+
+WHATSAPP_ENABLED=true
+WHATSAPP_PROVIDER=log
+WHATSAPP_DEFAULT_COUNTRY_CODE=55
+
+# Twilio (opcional)
+WHATSAPP_TWILIO_ACCOUNT_SID=
+WHATSAPP_TWILIO_AUTH_TOKEN=
+WHATSAPP_TWILIO_FROM=whatsapp:+14155238886
+```
+
+2. Garanta as tabelas de fila:
+
+```bash
+php artisan migrate
+```
+
+3. Rode o worker:
+
+```bash
+php artisan queue:work --queue=whatsapp,default
+```
+
+### Comandos de teste
+
+Envio imediato (sem fila):
+
+```bash
+php artisan whatsapp:test 85999999999 TESTE-123
+```
+
+Envio assíncrono (via fila):
+
+```bash
+php artisan whatsapp:test:queue 85999999999 TESTE-123
+```
+
+### Sobre Meta WhatsApp Cloud API
+
+Sem token da Meta, use `WHATSAPP_PROVIDER=log` para simular o envio. O projeto tambem suporta `twilio` quando as credenciais forem informadas.
