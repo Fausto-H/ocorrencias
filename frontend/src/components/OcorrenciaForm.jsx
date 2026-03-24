@@ -1,7 +1,7 @@
 import { useState } from "react";
 import api from "../services/api";
 
-export default function OcorrenciaForm() {
+export default function OcorrenciaForm({ onCreated }) {
     const [form, setForm] = useState({
         nome_paciente: "",
         telefone: "",
@@ -114,7 +114,11 @@ export default function OcorrenciaForm() {
         };
 
         try {
-            await api.post("/ocorrencias", payload);
+            const response = await api.post("/ocorrencias", payload);
+
+            if (onCreated) {
+                onCreated(response.data);
+            }
 
             showToast("Ocorrência registrada com sucesso!", "success");
 

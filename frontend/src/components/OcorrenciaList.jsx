@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-export default function OcorrenciaList() {
+export default function OcorrenciaList({ refreshSignal = 0 }) {
     const [ocorrencias, setOcorrencias] = useState([]);
     const [open, setOpen] = useState(false);
 
@@ -22,7 +22,7 @@ export default function OcorrenciaList() {
         if (open) {
             loadData();
         }
-    }, [open]);
+    }, [open, refreshSignal]);
 
     return (
         <section className="oc-list-section">
