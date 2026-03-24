@@ -8,6 +8,19 @@ export default function OcorrenciaForm() {
         endereco: ""
     });
 
+    const [toast, setToast] = useState({
+        message: "",
+        type: ""
+    });
+
+    const showToast = (message, type = "success") => {
+        setToast({ message, type });
+
+        setTimeout(() => {
+            setToast({ message: "", type: "" });
+        }, 3000);
+    };
+
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -21,7 +34,7 @@ export default function OcorrenciaForm() {
         try {
             await api.post("/ocorrencias", form);
 
-            alert("Ocorrência registrada com sucesso!");
+            showToast("Ocorrência registrada com sucesso!", "success");
 
             setForm({
                 nome_paciente: "",
@@ -30,41 +43,53 @@ export default function OcorrenciaForm() {
             });
 
         } catch (error) {
-            alert("Erro ao registrar ocorrência");
+            showToast("Erro ao registrar ocorrência", "error");
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Nova Ocorrência</h2>
+        <>
+            {/* TOAST */}
+            {toast.message && (
+                <div className={`toast ${toast.type}`}>
+                    {toast.message}
+                </div>
+            )}
 
-            <input
-                name="nome_paciente"
-                placeholder="Nome do paciente"
-                value={form.nome_paciente}
-                onChange={handleChange}
-                required
-            />
+            <form className="oc-form" onSubmit={handleSubmit}>
+                <h2 className="oc-section-title">Nova Ocorrência</h2>
 
-            <input
-                name="telefone"
-                placeholder="Telefone / WhatsApp"
-                value={form.telefone}
-                onChange={handleChange}
-                required
-            />
+                <input
+                    className="oc-input"
+                    name="nome_paciente"
+                    placeholder="Nome do paciente"
+                    value={form.nome_paciente}
+                    onChange={handleChange}
+                    required
+                />
 
-            <input
-                name="endereco"
-                placeholder="Endereço"
-                value={form.endereco}
-                onChange={handleChange}
-                required
-            />
+                <input
+                    className="oc-input"
+                    name="telefone"
+                    placeholder="Telefone / WhatsApp"
+                    value={form.telefone}
+                    onChange={handleChange}
+                    required
+                />
 
-            <button type="submit">
-                Registrar
-            </button>
-        </form>
+                <input
+                    className="oc-input"
+                    name="endereco"
+                    placeholder="Endereço"
+                    value={form.endereco}
+                    onChange={handleChange}
+                    required
+                />
+
+                <button className="oc-button" type="submit">
+                    Registrar
+                </button>
+            </form>
+        </>
     );
 }

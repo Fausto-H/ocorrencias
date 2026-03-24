@@ -1,0 +1,166 @@
+.home-page {
+  min-height: 100vh;
+  padding: 24px 16px;
+  background: #f2f2f2 ;
+  font-family: sans-serif;
+}
+
+.home-card {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #d9e0e7;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(36, 36, 36, 0.403);
+}
+
+.home-title {
+  margin: 0 0 20px;
+  color: #0f172a;
+  font-size: 2.0 rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.oc-section-title {
+  margin: 20px 0 0px;
+  color: #1f2937;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.oc-form {
+  display: grid;
+  gap: 10px;
+}
+
+.oc-input {
+  margin: 10px 0 0px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: #1f2937;
+  background: #ffffff;
+}
+
+.oc-input:focus {
+  outline: 2px solid rgba(235, 37, 37, 0.25);
+  border-color: #eb2525;
+}
+
+.oc-button {
+  margin: 20px 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: #eb2525;
+  color: #ffffff;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.oc-button:hover {
+  filter: brightness(0.85);
+}
+
+.oc-button-secondary {
+  margin-top: 16px;
+  background: #636363;
+}
+
+.oc-list-section {
+  margin-top: 8px;
+}
+
+.oc-table-wrapper {
+  margin-top: 10px;
+  overflow-x: auto;
+  border: 1px solid #d9e0e7;
+  border-radius: 10px;
+}
+
+.oc-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+  background: #ffffff;
+}
+
+.oc-table th,
+.oc-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 0.92rem;
+  color: #1f2937;
+}
+
+.oc-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.oc-table tbody tr:nth-child(even) {
+  background: #fcfdff;
+}
+
+.oc-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 640px) {
+  .home-page {
+    padding: 12px;
+  }
+
+  .home-card {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .oc-button,
+  .oc-input {
+    font-size: 0.9rem;
+  }
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+.toast.success {
+    background-color: #28a745;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

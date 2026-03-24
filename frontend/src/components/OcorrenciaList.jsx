@@ -25,34 +25,36 @@ export default function OcorrenciaList() {
     }, [open]);
 
     return (
-        <div style={{ marginTop: "20px" }}>
-            <button onClick={() => setOpen(!open)}>
+        <section className="oc-list-section">
+            <button className="oc-button oc-button-secondary" onClick={() => setOpen(!open)}>
                 {open ? "Ocultar ocorrências" : "Ver ocorrências"}
             </button>
 
             {open && (
-                <table border="1" cellPadding="8" style={{ marginTop: "10px" }}>
-                    <thead>
+                <div className="oc-table-wrapper">
+                    <table className="oc-table">
+                        <thead>
                         <tr>
                             <th>Protocolo</th>
                             <th>Paciente</th>
                             <th>Telefone</th>
                             <th>Endereço da Ocorrência</th>
                         </tr>
-                    </thead>
+                        </thead>
 
-                    <tbody>
-                        {ocorrencias.map((o) => (
-                            <tr key={o.id}>
-                                <td>{o.protocolo}</td>
-                                <td>{o.nome_paciente}</td>
-                                <td>{o.telefone}</td>
-                                <td>{o.endereco}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        <tbody>
+                            {ocorrencias.map((o) => (
+                                <tr key={o.id}>
+                                    <td>{o.protocolo}</td>
+                                    <td>{o.nome_paciente}</td>
+                                    <td>{o.telefone}</td>
+                                    <td>{o.endereco}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
-        </div>
+        </section>
     );
 }
