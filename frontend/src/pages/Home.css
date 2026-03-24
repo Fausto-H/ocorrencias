@@ -54,6 +54,17 @@
   border-color: #eb2525;
 }
 
+.oc-input-invalid {
+  border-color: #dc2626;
+}
+
+.oc-input-error {
+  margin-top: -4px;
+  color: #b91c1c;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
 .oc-button {
   margin: 20px 0 12px;
   border: none;
