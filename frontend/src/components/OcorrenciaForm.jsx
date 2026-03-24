@@ -63,7 +63,7 @@ export default function OcorrenciaForm() {
             />
 
             <button type="submit">
-                Registrar ⚡
+                Registrar
             </button>
         </form>
     );
