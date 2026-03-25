@@ -1,0 +1,94 @@
+# Ocorrencias - Backend Laravel + Frontend React
+
+Este projeto roda de duas formas, com o mesmo banco Postgres:
+
+- Fluxo manual (backend + worker + frontend)
+- Fluxo Docker (containers)
+
+O banco oficial do projeto e o Postgres do Docker Compose, persistido no volume `postgres_data`.
+
+## 1. Subir apenas o banco (base para os dois modos)
+
+Na raiz do projeto:
+
+```bash
+docker compose up -d db
+```
+
+Banco Postgres:
+
+- Host: `127.0.0.1`
+- Port: `5433`
+- Database: `ocorrencias`
+- User: `postgres`
+- Password: `postgres`
+
+## 2. Modo manual (seu fluxo)
+
+### Backend
+
+```bash
+cd backend
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+### Worker de mensagens
+
+Em outro terminal:
+
+```bash
+cd backend
+php artisan queue:work --queue=whatsapp,default
+```
+
+### Frontend
+
+Em outro terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## 3. Modo Docker (tudo em container)
+
+Na raiz do projeto:
+
+```bash
+docker compose up -d --build
+```
+
+O compose sobe:
+
+- `db` (Postgres)
+- `backend` (Laravel API)
+- `queue-worker` (fila WhatsApp/default)
+- `frontend` (Vite)
+
+## 4. Acessos
+
+- Frontend: http://localhost:5173
+- API: http://localhost:8000
+- Postgres: localhost:5433
+
+## 5. Parar
+
+```bash
+docker compose down
+```
+
+Para remover tambem o volume do banco:
+
+```bash
+docker compose down -v
+```
+
+## Observacoes
+
+- Os dois modos usam o mesmo banco (container `db` + volume `postgres_data`).
+- Nao rode backend manual e backend container ao mesmo tempo, pois ambos usam a porta 8000.
+- Nao rode frontend manual e frontend container ao mesmo tempo, pois ambos usam a porta 5173.
