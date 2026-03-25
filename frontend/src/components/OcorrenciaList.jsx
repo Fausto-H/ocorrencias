@@ -1,3 +1,4 @@
+import React from "react";
 import useOcorrenciaList from "../features/ocorrencias/hooks/useOcorrenciaList";
 import OcorrenciaTable from "../features/ocorrencias/components/OcorrenciaTable";
 

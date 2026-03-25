@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function OcorrenciaTable({ ocorrencias, isLoading, errorMessage }) {
     if (isLoading) {
         return <p className="oc-list-status">Carregando ocorrencias...</p>;
