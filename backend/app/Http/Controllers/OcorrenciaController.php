@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\SendProtocolWhatsAppJob;
 use App\Models\Ocorrencia;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 
 class OcorrenciaController extends Controller
@@ -53,7 +54,20 @@ class OcorrenciaController extends Controller
 
         $data['protocolo'] = "{$timestamp}-{$iniciais}";
 
-        $ocorrencia = Ocorrencia::create($data);
+        try {
+            $ocorrencia = Ocorrencia::create($data);
+        } catch (QueryException $exception) {
+            if ((string) $exception->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'code' => 'PROTOCOL_CONFLICT',
+                    'message' => 'Nao foi possivel gerar um protocolo unico. Tente novamente.',
+                    'request_id' => $request->header('X-Request-Id') ?: (string) str()->uuid(),
+                ], 409);
+            }
+
+            throw $exception;
+        }
 
         SendProtocolWhatsAppJob::dispatch($ocorrencia->id)->afterCommit();
 
