@@ -31,7 +31,7 @@ export function validateOcorrenciaForm(currentForm) {
         nextErrors.nome_paciente = "O nome precisa ter pelo menos 3 caracteres.";
     } else if (nome.length > 120) {
         nextErrors.nome_paciente = "O nome pode ter no maximo 120 caracteres.";
-    } else if (!/^[\p{L}\s'\-]+$/u.test(nome)) {
+    } else if (!/^[\p{L}\s'-]+$/u.test(nome)) {
         nextErrors.nome_paciente = "Use apenas letras, espacos, hifen e apostrofo. (Ex: Joao da Silva, Jean-Paul, O'Neill)";
     }
 
