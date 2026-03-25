@@ -18,6 +18,26 @@ const INITIAL_ERRORS = {
     endereco: ""
 };
 
+function getSubmitErrorMessage(error) {
+    if (error?.type === "timeout") {
+        return "Servidor demorou para responder. Tente novamente.";
+    }
+
+    if (error?.type === "network") {
+        return "Sem conexao com o servidor. Verifique sua internet.";
+    }
+
+    if (error?.type === "server") {
+        return "Erro interno do servidor. Tente novamente em instantes.";
+    }
+
+    if (error?.type === "http") {
+        return error?.message || "Falha ao processar a requisicao.";
+    }
+
+    return "Erro ao registrar ocorrencia.";
+}
+
 export default function useOcorrenciaForm({ onCreated } = {}) {
     const [form, setForm] = useState(INITIAL_FORM);
     const [errors, setErrors] = useState(INITIAL_ERRORS);
@@ -71,7 +91,7 @@ export default function useOcorrenciaForm({ onCreated } = {}) {
             setForm(INITIAL_FORM);
             setErrors(INITIAL_ERRORS);
         } catch (error) {
-            const apiErrors = error?.response?.data?.errors;
+            const apiErrors = error?.errors || error?.response?.data?.errors;
 
             if (apiErrors) {
                 setErrors({
@@ -83,7 +103,7 @@ export default function useOcorrenciaForm({ onCreated } = {}) {
                 return;
             }
 
-            showToast("Erro ao registrar ocorrencia", "error");
+            showToast(getSubmitErrorMessage(error), "error");
         } finally {
             setIsSubmitting(false);
         }

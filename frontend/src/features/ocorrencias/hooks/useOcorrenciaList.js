@@ -1,6 +1,22 @@
 import { useEffect, useState } from "react";
 import { listOcorrencias } from "../services/ocorrenciasService";
 
+function getListErrorMessage(error) {
+    if (error?.type === "timeout") {
+        return "Servidor demorou para responder. Tente novamente.";
+    }
+
+    if (error?.type === "network") {
+        return "Sem conexao com o servidor no momento.";
+    }
+
+    if (error?.type === "server") {
+        return "Erro interno ao buscar ocorrencias.";
+    }
+
+    return "Erro ao buscar ocorrencias.";
+}
+
 export default function useOcorrenciaList(refreshSignal = 0) {
     const [ocorrencias, setOcorrencias] = useState([]);
     const [open, setOpen] = useState(false);
@@ -16,7 +32,7 @@ export default function useOcorrenciaList(refreshSignal = 0) {
             const ordered = [...data].sort((a, b) => b.id - a.id);
             setOcorrencias(ordered);
         } catch (error) {
-            setErrorMessage("Erro ao buscar ocorrencias.");
+            setErrorMessage(getListErrorMessage(error));
         } finally {
             setIsLoading(false);
         }
