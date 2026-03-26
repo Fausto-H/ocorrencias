@@ -1,11 +1,13 @@
 # Ocorrencias - Backend Laravel + Frontend React
 
-Este projeto roda de duas formas, com o mesmo banco Postgres:
+Este projeto consiste em uma API em Laravel integrada a um frontend em React, com envio de notificações via WhatsApp utilizando fila assíncrona.
 
-- Fluxo manual (backend + worker + frontend)
-- Fluxo Docker (containers)
+O sistema pode ser executado de duas formas:
 
-O banco oficial do projeto e o Postgres do Docker Compose, persistido no volume `postgres_data`.
+- Modo manual (backend + worker + frontend)
+- Modo Docker (containers)
+
+O banco de dados utilizado é PostgreSQL, rodando via Docker e persistido no volume `postgres_data`.
 
 ## Pré-requisitos
 
@@ -13,6 +15,15 @@ O banco oficial do projeto e o Postgres do Docker Compose, persistido no volume 
 
 - Antes de rodar os comandos abaixo, certifique-se de que o Docker Desktop está aberto.
 - Caso contrário, você pode receber erros de conexão com o Docker daemon.
+
+
+## Configuração do ambiente (.env)
+
+No diretório `backend`, copie o arquivo de exemplo:
+
+```bash
+cp .env.example .env
+
 
 ## 1. Subir apenas o banco (base para os dois modos)
 
@@ -73,7 +84,7 @@ O compose sobe:
 
 - `db` (Postgres)
 - `backend` (Laravel API)
-- `queue-worker` (fila WhatsApp/default)
+- `queue-worker` (fila de mensagens)
 - `frontend` (Vite)
 
 ## 4. Acessos
