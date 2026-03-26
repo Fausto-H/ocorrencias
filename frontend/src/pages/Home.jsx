@@ -13,7 +13,7 @@ export default function Home() {
     return (
         <main className="home-page">
             <section className="home-card">
-                <h1 className="home-title">Sistema de Ocorrências</h1>
+                <h1 className="home-title">SISTEMA DE OCORRÊNCIAS</h1>
 
                 <OcorrenciaForm onCreated={handleCreated} />
                 <OcorrenciaList refreshSignal={refreshSignal} />

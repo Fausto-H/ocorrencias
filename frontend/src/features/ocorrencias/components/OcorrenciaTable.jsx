@@ -2,7 +2,11 @@ import React from "react";
 
 export default function OcorrenciaTable({ ocorrencias, isLoading, errorMessage }) {
     if (isLoading) {
-        return <p className="oc-list-status">Carregando ocorrencias...</p>;
+        return (
+            <div className="oc-list-loader" role="status" aria-label="Carregando ocorrencias">
+                <span className="oc-spinner" />
+            </div>
+        );
     }
 
     if (errorMessage) {

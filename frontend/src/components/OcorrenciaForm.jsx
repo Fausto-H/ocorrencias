@@ -22,7 +22,7 @@ export default function OcorrenciaForm({ onCreated }) {
             )}
 
             <form className="oc-form" onSubmit={handleSubmit}>
-                <h2 className="oc-section-title">Nova Ocorrência</h2>
+                <h2 className="oc-section-title">Registrar Nova Ocorrência</h2>
 
                 <OcorrenciaFormField
                     name="nome_paciente"
@@ -52,7 +52,7 @@ export default function OcorrenciaForm({ onCreated }) {
                 />
 
                 <button className="oc-button" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Registrando..." : "Registrar"}
+                    {isSubmitting ? "Registrando..." : "REGISTRAR"}
                 </button>
             </form>
         </>

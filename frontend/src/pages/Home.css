@@ -1,7 +1,17 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
 .home-page {
   min-height: 100vh;
   padding: 24px 16px;
-  background: #f2f2f2 ;
+  background: #C20803 ;
   font-family: sans-serif;
 }
 
@@ -11,7 +21,7 @@
   background: #ffffff;
   border: 1px solid #d9e0e7;
   border-radius: 12px;
-  padding: 20px;
+  padding: 30px;
   box-shadow: 0 8px 20px rgba(36, 36, 36, 0.403);
 }
 
@@ -51,7 +61,7 @@
 
 .oc-input:focus {
   outline: 2px solid rgba(235, 37, 37, 0.25);
-  border-color: #eb2525;
+  border-color: #C20803;
 }
 
 .oc-input-invalid {
@@ -69,7 +79,7 @@
   margin: 20px 0 12px;
   border: none;
   border-radius: 8px;
-  background: #eb2525;
+  background: #C20803;
   color: #ffffff;
   padding: 10px 14px;
   font-size: 0.95rem;
@@ -89,7 +99,9 @@
 
 .oc-button-secondary {
   margin-top: 16px;
-  background: #636363;
+  margin-bottom: 0%;
+  width: 100%;
+  background: #EA5900;
 }
 
 .oc-list-section {
@@ -100,6 +112,21 @@
   margin-top: 12px;
   color: #334155;
   font-size: 0.92rem;
+}
+
+.oc-list-loader {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.oc-spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid #ffd5bf;
+  border-top-color: #ea5900;
+  animation: spin 0.8s linear infinite;
 }
 
 .oc-list-status-error {
@@ -130,13 +157,13 @@
 }
 
 .oc-table th {
-  background: #f8fafc;
+  background: #EA5900;
   font-weight: 600;
-  color: #0f172a;
+  color: #ffffff;
 }
 
 .oc-table tbody tr:nth-child(even) {
-  background: #fcfdff;
+  background: #ffe9db;
 }
 
 .oc-table tbody tr:last-child td {
@@ -189,4 +216,10 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
