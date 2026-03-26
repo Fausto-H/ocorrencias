@@ -23,7 +23,7 @@ No diretório `backend`, copie o arquivo de exemplo:
 
 ```bash
 cp .env.example .env
-cp .env.example .env.docker
+cp .env.docker.example .env.docker
 
 ## 1. Subir apenas o banco (base para os dois modos)
 
