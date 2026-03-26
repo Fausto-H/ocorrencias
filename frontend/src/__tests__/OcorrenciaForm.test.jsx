@@ -7,7 +7,7 @@ describe('OcorrenciaForm Component', () => {
   it('deve renderizar título "Nova Ocorrência"', () => {
     const mockOnCreated = vi.fn();
     render(<OcorrenciaForm onCreated={mockOnCreated} />);
-    expect(screen.getByText('Nova Ocorrência')).toBeInTheDocument();
+    expect(screen.getByText(/registrar nova ocorrência/i)).toBeInTheDocument();
   });
 
   it('deve renderizar campos de entrada', () => {
@@ -22,7 +22,7 @@ describe('OcorrenciaForm Component', () => {
   it('deve renderizar botão de registrar', () => {
     const mockOnCreated = vi.fn();
     render(<OcorrenciaForm onCreated={mockOnCreated} />);
-    expect(screen.getByText('Registrar')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /registrar/i })).toBeInTheDocument();
   });
 
   it('deve ter classe oc-form no formulário', () => {
