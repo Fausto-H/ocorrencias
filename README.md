@@ -17,13 +17,13 @@ O banco de dados utilizado é PostgreSQL, rodando via Docker e persistido no vol
 - Caso contrário, você pode receber erros de conexão com o Docker daemon.
 
 
-## Configuração do ambiente (.env)
+## Configuração do ambiente (.env e .env.docekr)
 
 No diretório `backend`, copie o arquivo de exemplo:
 
 ```bash
 cp .env.example .env
-
+cp .env.example .env.docker
 
 ## 1. Subir apenas o banco (base para os dois modos)
 
